@@ -1,11 +1,24 @@
-import React from 'react';
-
 const Login = () => {
   return (
     <div>
-      {/* Skeleton Login Page */}
-    </div>
-  );
-};
+      <h1>Login</h1>
 
-export default Login;
+      <form>
+        <div>
+          <label>Email</label><br />
+          <input type="email" />
+        </div>
+
+        <div>
+          <label>Password</label><br />
+          <input type="password" />
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  )
+}
+
+export default Login
+
