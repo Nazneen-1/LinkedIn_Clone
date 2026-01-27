@@ -1,29 +1,17 @@
+import "./Register.css"
+
 const Register = () => {
   return (
-    <div>
-      <h1>Register</h1>
-
-      <form>
-        <div>
-          <label>Name</label><br />
-          <input type="text" />
-        </div>
-
-        <div>
-          <label>Email</label><br />
-          <input type="email" />
-        </div>
-
-        <div>
-          <label>Password</label><br />
-          <input type="password" />
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Register</h2>
+        <input type="text" placeholder="Name" />
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button>Register</button>
+      </div>
     </div>
   )
 }
 
 export default Register
-
