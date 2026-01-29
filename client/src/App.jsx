@@ -9,7 +9,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
 
-        {/* Default Route → Login */}
+        {/* Default Route */}
         <Route path="/" element={<Navigate to="/login" replace />} />
 
         {/* Auth Routes */}
