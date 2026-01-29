@@ -4,7 +4,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 
-const App = () => {
+function App() {
   return (
     <BrowserRouter>
       <Routes>
