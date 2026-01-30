@@ -1,11 +1,15 @@
-import React from 'react'
-
 const EditProfile = () => {
   return (
-    <div>
-      EditProfile
-    </div>
-  )
-}
+    <div className="edit-profile">
+      <h2>Edit Profile</h2>
 
-export default EditProfile
+      <input type="text" placeholder="Name" />
+      <input type="text" placeholder="Headline" />
+      <input type="text" placeholder="Location" />
+
+      <button>Save Changes</button>
+    </div>
+  );
+};
+
+export default EditProfile;
