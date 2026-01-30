@@ -1,11 +1,11 @@
-import React from 'react'
-
-const ProfileStrength = () => {
+const ProfileStrength = ({ strength }) => {
   return (
-    <div>
-      
+    <div className="profile-strength">
+      <p>Profile Strength</p>
+      <progress value={strength} max="100"></progress>
+      <span>{strength}%</span>
     </div>
-  )
-}
+  );
+};
 
-export default ProfileStrength
+export default ProfileStrength;

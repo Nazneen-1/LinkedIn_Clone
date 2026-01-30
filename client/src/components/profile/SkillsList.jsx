@@ -1,11 +1,14 @@
-import React from 'react'
-
-const SkillsList = () => {
+const SkillsList = ({ skills }) => {
   return (
-    <div>
-      
+    <div className="skills">
+      <h4>Skills</h4>
+      <ul>
+        {skills.map((skill, index) => (
+          <li key={index}>{skill}</li>
+        ))}
+      </ul>
     </div>
-  )
-}
+  );
+};
 
-export default SkillsList
+export default SkillsList;
