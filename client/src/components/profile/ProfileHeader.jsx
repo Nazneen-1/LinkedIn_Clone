@@ -1,11 +1,11 @@
-const ProfileHeader = ({ name, headline, location }) => {
-  return (
-    <div className="profile-header">
-      <h2>{name}</h2>
-      <p>{headline}</p>
-      <span>{location}</span>
-    </div>
-  );
-};
+import React from 'react'
 
-export default ProfileHeader;
+const ProfileHeader = () => {
+  return (
+    <div>
+      ProfileHeader
+    </div>
+  )
+}
+
+export default ProfileHeader

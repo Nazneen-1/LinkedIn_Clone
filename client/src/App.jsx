@@ -1,8 +1,11 @@
-import Profile from "./pages/Profile.jsx";
+import React from 'react'
 
-
-function App() {
-  return <Profile />;
+const App = () => {
+  return (
+    <div>
+      App
+    </div>
+  )
 }
 
-export default App;
+export default App
