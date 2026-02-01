@@ -1,71 +1,67 @@
 import { useState } from "react";
+import CreatePost from "../components/post/CreatePost";
 import PostCard from "../components/post/PostCard";
+import ProfileSidebar from "../components/common/ProfileSidebar";
+import RightSidebar from "../components/common/RightSidebar";
 import "./home.css";
 
 const Home = () => {
-  const [showCreatePost, setShowCreatePost] = useState(false);
-  const [postText, setPostText] = useState("");
-
   const [posts, setPosts] = useState([
     {
       id: 1,
-      author: "John Doe",
+      author: {
+        name: "John Doe",
+        headline: "Software Engineer at Tech Corp",
+        avatar: null,
+      },
       content: "Excited to start my new role today!",
-      time: "2h ago",
+      timestamp: "2h ago",
+      likes: 45,
+      comments: 7,
+      reposts: 2,
     },
     {
       id: 2,
-      author: "Jane Smith",
+      author: {
+        name: "Jane Smith",
+        headline: "Full Stack Developer | React Enthusiast",
+        avatar: null,
+      },
       content: "Just completed a React project 🚀",
-      time: "5h ago",
+      timestamp: "5h ago",
+      likes: 89,
+      comments: 12,
+      reposts: 5,
+      image: null,
     },
   ]);
 
-  const handlePost = () => {
-    if (!postText.trim()) return;
-
-    const newPost = {
-      id: Date.now(),
-      author: "You",
-      content: postText,
-      time: "Just now",
-    };
-
+  const handleNewPost = (newPost) => {
     setPosts([newPost, ...posts]);
-    setPostText("");
-    setShowCreatePost(false);
   };
 
   return (
-    <div className="feed-container">
-      {/* Create Post */}
-      <div className="create-post">
-        {!showCreatePost ? (
-          <input
-            placeholder="Start a post…"
-            onFocus={() => setShowCreatePost(true)}
-          />
-        ) : (
-          <div className="create-post-expanded">
-            <textarea
-              placeholder="What do you want to talk about?"
-              value={postText}
-              onChange={(e) => setPostText(e.target.value)}
-            />
+    <div className="home-container">
+      {/* Left Sidebar - Profile */}
+      <aside className="left-sidebar">
+        <ProfileSidebar />
+      </aside>
 
-            <div className="create-post-actions">
-              <button onClick={handlePost} disabled={!postText.trim()}>
-                Post
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
+      {/* Main Feed */}
+      <main className="main-feed">
+        <CreatePost onPost={handleNewPost} />
+        
+        <div className="feed-posts">
+          {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
+        </div>
+      </main>
 
-      {/* Feed */}
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
+      {/* Right Sidebar - News & Puzzles */}
+      <aside className="right-sidebar">
+        <RightSidebar />
+      </aside>
     </div>
   );
 };

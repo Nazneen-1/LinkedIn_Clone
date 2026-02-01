@@ -1,0 +1,147 @@
+.recommendation-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.recommendation-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.dismiss-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s;
+  color: var(--text-secondary);
+}
+
+.dismiss-btn:hover {
+  background: white;
+  color: var(--text-primary);
+}
+
+.recommendation-cover {
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.recommendation-avatar {
+  width: 80px;
+  height: 80px;
+  margin: -40px auto 0;
+  border-radius: 50%;
+  border: 3px solid white;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.recommendation-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--linkedin-blue);
+  color: white;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.recommendation-content {
+  padding: var(--spacing-lg);
+  text-align: center;
+}
+
+.recommendation-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: var(--text-primary);
+}
+
+.recommendation-headline {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-md) 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mutual-connections {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.recommendation-reason {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--border-light);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.reason-icon {
+  font-size: 14px;
+}
+
+.reason-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.connect-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: transparent;
+  border: 2px solid var(--linkedin-blue);
+  border-radius: 24px;
+  color: var(--linkedin-blue);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.connect-btn:hover {
+  background: var(--linkedin-blue);
+  color: white;
+}
+
+.connect-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

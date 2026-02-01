@@ -1,107 +1,66 @@
-.feed-container {
-  max-width: 600px;
+/* Main Container - Three Column Layout */
+.home-container {
+  display: grid;
+  grid-template-columns: 225px 1fr 300px;
+  gap: 24px;
+  max-width: 1128px;
   margin: 0 auto;
+  padding: 24px 0;
 }
 
-/* Create Post */
-.create-post {
-  background: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  margin-bottom: 16px;
+/* Left Sidebar */
+.left-sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
 }
 
-.create-post input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  outline: none;
+/* Main Feed */
+.main-feed {
+  max-width: 540px;
 }
 
-.create-post input:focus {
-  border-color: #0a66c2;
+.feed-posts {
+  margin-top: 8px;
 }
 
-/* Post Card */
-.post-card {
-  background: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  margin-bottom: 16px;
+/* Right Sidebar */
+.right-sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
 }
 
-.post-header {
-  font-weight: 600;
-}
-
-.post-time {
-  font-size: 12px;
-  color: gray;
-}
-
-.post-content {
-  margin: 12px 0;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .feed-container {
-    max-width: 100%;
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .home-container {
+    grid-template-columns: 200px 1fr 280px;
+    gap: 16px;
   }
 }
 
-.post-actions {
-  display: flex;
-  gap: 24px;
-  border-top: 1px solid #e0e0e0;
-  padding-top: 8px;
-  margin-top: 8px;
+@media (max-width: 992px) {
+  .home-container {
+    grid-template-columns: 1fr 300px;
+    padding: 16px;
+  }
+
+  .left-sidebar {
+    display: none;
+  }
 }
 
-.post-action {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #555;
-}
+@media (max-width: 768px) {
+  .home-container {
+    grid-template-columns: 1fr;
+    padding: 8px;
+  }
 
-.post-action:hover {
-  color: #0a66c2;
-}
+  .right-sidebar {
+    display: none;
+  }
 
-
-.create-post-expanded textarea {
-  width: 100%;
-  min-height: 80px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  resize: none;
-  outline: none;
-}
-
-.create-post-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 8px;
-}
-
-.create-post-actions button {
-  background: #0a66c2;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.create-post-actions button:disabled {
-  background: #9dbfe5;
-  cursor: not-allowed;
+  .main-feed {
+    max-width: 100%;
+  }
 }
