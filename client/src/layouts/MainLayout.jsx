@@ -1,15 +1,16 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
-import Sidebar from "../components/common/Sidebar";
+import "./MainLayout.css";
 
-export default function MainLayout() {
+const MainLayout = () => {
   return (
-    <div>
+    <div className="main-layout">
       <Navbar />
-      <div style={{ display: "flex" }}>
-        <Sidebar />
+      <div className="layout-content">
         <Outlet />
       </div>
     </div>
   );
-}
+};
+
+export default MainLayout;

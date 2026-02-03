@@ -1,11 +1,19 @@
-import { Navigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import Loader from './Loader';
 
-export default function ProtectedRoute({ children }) {
-  const isAuthenticated = true; // TEMP mock
+const ProtectedRoute = ({ children }) => {
+  const { user, loading } = useAuth();
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+  if (loading) {
+    return <Loader fullScreen />;
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
   }
 
   return children;
-}
+};
+
+export default ProtectedRoute;

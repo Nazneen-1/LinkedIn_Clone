@@ -1,0 +1,66 @@
+/* Main Container - Three Column Layout */
+.home-container {
+  display: grid;
+  grid-template-columns: 225px 1fr 300px;
+  gap: 24px;
+  max-width: 1128px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+/* Left Sidebar */
+.left-sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+}
+
+/* Main Feed */
+.main-feed {
+  max-width: 540px;
+}
+
+.feed-posts {
+  margin-top: 8px;
+}
+
+/* Right Sidebar */
+.right-sidebar {
+  position: sticky;
+  top: 80px;
+  height: fit-content;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .home-container {
+    grid-template-columns: 200px 1fr 280px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 992px) {
+  .home-container {
+    grid-template-columns: 1fr 300px;
+    padding: 16px;
+  }
+
+  .left-sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    grid-template-columns: 1fr;
+    padding: 8px;
+  }
+
+  .right-sidebar {
+    display: none;
+  }
+
+  .main-feed {
+    max-width: 100%;
+  }
+}
