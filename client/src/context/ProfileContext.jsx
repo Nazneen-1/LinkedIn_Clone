@@ -1,13 +1,16 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import * as userAPI from '../services/user.api';
-import { useAuth } from './AuthContext';
+const USE_MOCK_API = true;
+
+
+import { createContext, useContext, useState, useEffect } from "react";
+import * as userAPI from "../services/user.api";
+import { useAuth } from "./AuthContext";
 
 const ProfileContext = createContext(null);
 
 export const useProfile = () => {
   const context = useContext(ProfileContext);
   if (!context) {
-    throw new Error('useProfile must be used within a ProfileProvider');
+    throw new Error("useProfile must be used within a ProfileProvider");
   }
   return context;
 };
@@ -18,7 +21,9 @@ export const ProfileProvider = ({ children }) => {
   const [recommendations, setRecommendations] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Fetch profile strength score and suggestions
+  // -------------------------------
+  // FETCH PROFILE STRENGTH
+  // -------------------------------
   useEffect(() => {
     if (user) {
       fetchProfileStrength();
@@ -26,31 +31,58 @@ export const ProfileProvider = ({ children }) => {
   }, [user]);
 
   const fetchProfileStrength = async () => {
+    setLoading(true);
+
     try {
-      setLoading(true);
+      // 🟢 BACKEND AVAILABLE (later)
       const data = await userAPI.getProfileStrength();
       setProfileStrength(data);
     } catch (err) {
-      console.error('Failed to fetch profile strength:', err);
+      // 🟡 FRONTEND-ONLY FALLBACK
+      console.warn("Using mock profile strength (backend not connected)");
+
+      const mockStrength = {
+        score: getCompletionPercentage(),
+        level: getStrengthLevel().level,
+      };
+
+      setProfileStrength(mockStrength);
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch connection recommendations
+  // -------------------------------
+  // FETCH RECOMMENDATIONS
+  // -------------------------------
   const fetchRecommendations = async () => {
     try {
       const data = await userAPI.getRecommendations();
       setRecommendations(data);
     } catch (err) {
-      console.error('Failed to fetch recommendations:', err);
+      console.warn("Using mock recommendations");
+
+      setRecommendations([
+        {
+          id: "headline",
+          title: "Add a headline",
+          description: "Help others understand what you do",
+        },
+        {
+          id: "skills",
+          title: "Add more skills",
+          description: "Profiles with skills get more views",
+        },
+      ]);
     }
   };
 
-  // Calculate profile completion percentage
+  // -------------------------------
+  // PROFILE COMPLETION LOGIC
+  // -------------------------------
   const getCompletionPercentage = () => {
     if (!user) return 0;
-    
+
     const fields = [
       user.name,
       user.headline,
@@ -61,80 +93,66 @@ export const ProfileProvider = ({ children }) => {
       user.education?.length > 0,
       user.skills?.length > 0,
     ];
-    
+
     const completed = fields.filter(Boolean).length;
     return Math.round((completed / fields.length) * 100);
   };
 
-  // Get profile strength level
   const getStrengthLevel = () => {
     const percentage = getCompletionPercentage();
-    if (percentage >= 90) return { level: 'Expert', color: '#057642' };
-    if (percentage >= 70) return { level: 'Advanced', color: '#0a66c2' };
-    if (percentage >= 50) return { level: 'Intermediate', color: '#c37d16' };
-    return { level: 'Beginner', color: '#cc1016' };
+    if (percentage >= 90) return { level: "Expert", color: "#057642" };
+    if (percentage >= 70) return { level: "Advanced", color: "#0a66c2" };
+    if (percentage >= 50) return { level: "Intermediate", color: "#c37d16" };
+    return { level: "Beginner", color: "#cc1016" };
   };
 
-  // Get suggestions to improve profile
   const getSuggestions = () => {
     if (!user) return [];
-    
+
     const suggestions = [];
-    
-    if (!user.headline) {
+
+    if (!user.headline)
       suggestions.push({
-        id: 'headline',
-        title: 'Add a headline',
-        description: 'Help others understand what you do',
-        priority: 'high'
+        id: "headline",
+        title: "Add a headline",
+        description: "Help others understand what you do",
       });
-    }
-    
-    if (!user.about) {
+
+    if (!user.about)
       suggestions.push({
-        id: 'about',
-        title: 'Write your summary',
-        description: 'Tell your professional story',
-        priority: 'high'
+        id: "about",
+        title: "Write your summary",
+        description: "Tell your professional story",
       });
-    }
-    
-    if (!user.experience || user.experience.length === 0) {
+
+    if (!user.experience?.length)
       suggestions.push({
-        id: 'experience',
-        title: 'Add work experience',
-        description: 'Showcase your career journey',
-        priority: 'high'
+        id: "experience",
+        title: "Add work experience",
+        description: "Showcase your career journey",
       });
-    }
-    
-    if (!user.education || user.education.length === 0) {
+
+    if (!user.education?.length)
       suggestions.push({
-        id: 'education',
-        title: 'Add education',
-        description: 'Share your academic background',
-        priority: 'medium'
+        id: "education",
+        title: "Add education",
+        description: "Share your academic background",
       });
-    }
-    
-    if (!user.skills || user.skills.length < 3) {
+
+    if (!user.skills || user.skills.length < 3)
       suggestions.push({
-        id: 'skills',
-        title: 'Add skills',
-        description: 'Help people discover your expertise',
-        priority: 'medium'
+        id: "skills",
+        title: "Add skills",
+        description: "Help people discover your expertise",
       });
-    }
-    
-    if (!user.profileImage) {
+
+    if (!user.profileImage)
       suggestions.push({
-        id: 'profile-image',
-        title: 'Add profile photo',
-        description: 'Profiles with photos get more views',
-        priority: 'high'
+        id: "profile-image",
+        title: "Add profile photo",
+        description: "Profiles with photos get more views",
       });
-    }
-    
+
     return suggestions;
   };
 

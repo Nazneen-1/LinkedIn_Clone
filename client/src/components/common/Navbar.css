@@ -247,3 +247,40 @@
     display: none;
   }
 }
+
+.me-wrapper {
+  position: relative;
+}
+
+.me-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 200px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.dropdown-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-item:hover {
+  background-color: #f3f2ef;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #ddd;
+  margin: 6px 0;
+}
+
+.logout {
+  color: #c0392b;
+  font-weight: 500;
+}

@@ -16,10 +16,12 @@ import "./Navbar.css";
 const Navbar = () => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
-  const [searchFocused, setSearchFocused] = useState(false);
 
-  const handleLogout = async () => {
-    await logout();
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [showMeMenu, setShowMeMenu] = useState(false);
+
+  const handleLogout = () => {
+    logout();
     navigate("/login");
   };
 
@@ -34,7 +36,7 @@ const Navbar = () => {
   return (
     <nav className="linkedin-navbar">
       <div className="navbar-container">
-        {/* Left Section - Logo & Search */}
+        {/* Left */}
         <div className="navbar-left">
           <div className="navbar-logo" onClick={() => navigate("/home")}>
             <div className="logo-icon">in</div>
@@ -51,7 +53,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Center Section - Nav Items */}
+        {/* Center */}
         <div className="navbar-center">
           {navItems.map((item, index) => (
             <div
@@ -63,23 +65,54 @@ const Navbar = () => {
             >
               <div className="nav-icon-wrapper">
                 <item.icon className="nav-icon" />
-                {item.badge && <span className="nav-badge">{item.badge}</span>}
+                {item.badge && (
+                  <span className="nav-badge">{item.badge}</span>
+                )}
               </div>
               <span className="nav-label">{item.label}</span>
             </div>
           ))}
         </div>
 
-        {/* Right Section - Profile & Business */}
+        {/* Right */}
         <div className="navbar-right">
-          <div className="nav-item" onClick={() => navigate("/profile")}>
+          {/* ME */}
+          <div
+            className="nav-item me-wrapper"
+            onClick={() => setShowMeMenu(!showMeMenu)}
+          >
             <div className="nav-icon-wrapper">
               <FaUserCircle className="nav-icon" />
             </div>
             <span className="nav-label">
-              Me
-              <span className="dropdown-arrow">▼</span>
+              Me <span className="dropdown-arrow">▼</span>
             </span>
+
+            {showMeMenu && (
+              <div className="me-dropdown">
+                <div
+                  className="dropdown-item"
+                  onClick={() => navigate("/profile")}
+                >
+                  View Profile
+                </div>
+                <div
+                  className="dropdown-item"
+                  onClick={() => navigate("/settings")}
+                >
+                  Settings
+                </div>
+
+                <div className="dropdown-divider" />
+
+                <div
+                  className="dropdown-item logout"
+                  onClick={handleLogout}
+                >
+                  Sign Out
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="nav-divider"></div>
@@ -89,8 +122,7 @@ const Navbar = () => {
               <FaTh className="nav-icon" />
             </div>
             <span className="nav-label">
-              For Business
-              <span className="dropdown-arrow">▼</span>
+              For Business <span className="dropdown-arrow">▼</span>
             </span>
           </div>
 
